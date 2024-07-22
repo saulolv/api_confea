@@ -7,13 +7,14 @@ import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.UUID;
 
-@MappedSuperclass
+
 @Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name = "tb_usuarios")
-public class Usuario {
+public abstract class Usuario {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private UUID id;
 
     @Column(nullable = false)
@@ -54,15 +55,15 @@ public class Usuario {
     @Column(nullable = false, name="pais_nascimento")
     private String paisNascimento;
 
-    @OneToOne(mappedBy = "tb_usuarios", cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_rg", referencedColumnName = "id")
     private Rg rg;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "codigo_crea")
     private Crea crea;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "usuario")
     @JoinColumn(name = "id_endereco", referencedColumnName = "id")
     private Set<Telefone> telefones;
 

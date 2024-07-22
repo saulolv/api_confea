@@ -11,7 +11,7 @@ import java.util.UUID;
 public class Rg {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private UUID id;
 
     @Column(nullable = false, length = 20)
