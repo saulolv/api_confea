@@ -2,17 +2,18 @@ package gov.api_confea.model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.UUID;
 
 @MappedSuperclass
 @Entity
-@Table(name = "usuario")
+@Table(name = "tb_usuarios")
 public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private UUID id;
 
     @Column(nullable = false)
@@ -24,9 +25,57 @@ public class Usuario {
     @Column(nullable = false, unique = true)
     private String cpf;
 
+    @Column(nullable = false)
+    private String senha;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Sexo sexo;
 
-    @OneToOne
+    @Column(nullable = false, name="data_nascimento")
+    private LocalDate dataNascimento;
+
+    @Column(name="nome_social")
+    private String nomeSocial;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private PNE pne;
+
+    @Column(nullable = false)
+    private String nacionalidade;
+
+    @Column(nullable = false, name="cidade_naturalidade")
+    private String cidadeNaturalidade;
+
+    @Column(nullable = false, name="uf_naturalidade")
+    private String ufNaturalidade;
+
+    @Column(nullable = false, name="pais_nascimento")
+    private String paisNascimento;
+
+    @OneToOne(mappedBy = "tb_usuarios", cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_rg", referencedColumnName = "id")
+    private Rg rg;
+
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "codigo_crea")
     private Crea crea;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_endereco", referencedColumnName = "id")
+    private Set<Telefone> telefones;
+
+    @Column(nullable = false, name="data_criacao")
+    private final LocalDateTime dataCriacao = LocalDateTime.now();
+}
+
+enum Sexo {
+    MASCULINO,
+    FEMININO
+}
+
+enum PNE { // Precisa ser configurado adequadamente
+    SIM,
+    NAO
 }
