@@ -9,7 +9,7 @@ import java.util.UUID;
 public class Profissional extends Usuario {
 
     @Column(nullable = false, name="rnp", unique = true)
-    private Long rnp;
+    private String rnp;
 
     @Column(nullable = false, length = 40, name="num_registro_crea")
     private String numRegistroCrea;
@@ -56,7 +56,7 @@ public class Profissional extends Usuario {
 
     // Getters and Setters
 
-    public Long getRnp() {
+    public String getRnp() {
         return rnp;
     }
 
@@ -161,7 +161,7 @@ public class Profissional extends Usuario {
 
 enum TipoNumeroCarteira {
     CREA,
-    CAU
+    CONFEA
 }
 
 enum EstadoCivil {
