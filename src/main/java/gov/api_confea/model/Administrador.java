@@ -8,20 +8,10 @@ import java.util.UUID;
 @Table(name = "tb_administradores")
 public class Administrador extends Usuario {
 
-    @Id
-    @GeneratedValue
-    private UUID id;
-
     @Enumerated
     private Cargo cargo;
 
     // Getters and Setters
-
-
-    @Override
-    public UUID getId() {
-        return id;
-    }
 
     public Cargo getCargo() {
         return cargo;

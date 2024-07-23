@@ -23,7 +23,7 @@ public class Telefone {
     private TipoTelefone tipo;
 
     @ManyToOne
-    @JoinColumn(name = "id_usuario")
+    @JoinColumn(name = "id_usuario", referencedColumnName = "id")
     private Usuario usuario;
 
     @ManyToOne

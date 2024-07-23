@@ -27,11 +27,9 @@ public class Crea {
     private String assinaturaPresidente; // revisar tipo
 
     @OneToMany(mappedBy = "crea", cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_endereco_crea", referencedColumnName = "id")
     private Set<EnderecoCrea> enderecos;
 
     @OneToMany(mappedBy = "crea", cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_usuario", referencedColumnName = "id")
     private Set<Usuario> usuarios;
 
     protected Crea() {

@@ -9,10 +9,6 @@ import java.util.UUID;
 @Table(name = "tb_enderecos_crea")
 public class EnderecoCrea extends Endereco {
 
-    @Id
-    @GeneratedValue
-    private UUID id;
-
     @Column(nullable = false, length = 30)
     private LocalDateTime inicioExpediente;
 
@@ -25,11 +21,6 @@ public class EnderecoCrea extends Endereco {
 
 
     // Getters and Setters
-
-    @Override
-    public UUID getId() {
-        return id;
-    }
 
     public Crea getCrea() {
         return crea;

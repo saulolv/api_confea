@@ -9,7 +9,7 @@ import java.util.UUID;
 
 
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "tb_usuarios")
 public abstract class Usuario {
 
@@ -59,12 +59,11 @@ public abstract class Usuario {
     @JoinColumn(name = "id_rg", referencedColumnName = "id")
     private Rg rg;
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "codigo_crea", referencedColumnName = "codigo_crea")
     private Crea crea;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "usuario")
-    @JoinColumn(name = "id_endereco", referencedColumnName = "id")
     private Set<Telefone> telefones;
 
     @Column(nullable = false, name="data_criacao")

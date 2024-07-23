@@ -8,8 +8,7 @@ import java.util.UUID;
 @Table(name = "tb_profissionais")
 public class Profissional extends Usuario {
 
-    @Id
-    @GeneratedValue
+    @Column(nullable = false, name="rnp", unique = true)
     private Long rnp;
 
     @Column(nullable = false, length = 40, name="num_registro_crea")

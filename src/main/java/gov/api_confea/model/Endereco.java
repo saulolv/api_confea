@@ -5,9 +5,11 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+
 @Entity
-@Table(name = "tb_enderecos_usuarios")
-public class Endereco {
+@Inheritance(strategy = InheritanceType.JOINED)
+@Table(name = "tb_enderecos")
+public abstract class Endereco {
 
     @Id
     @GeneratedValue
