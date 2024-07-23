@@ -19,7 +19,7 @@ public class ProfissionalController {
         this.profissionalService = profissionalService;
     }
 
-    @GetMapping
+    @GetMapping("/listar")
     public ResponseEntity<Page<Profissional>> listarProfissionais(ProfissionalFiltroDto profissionalFiltroDto) {
         Page<Profissional> profissionais = profissionalService.listarProfissionais(profissionalFiltroDto);
 
