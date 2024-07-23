@@ -9,6 +9,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
@@ -18,7 +19,12 @@ public class UsuarioServiceImpl implements UsuarioService {
     public UsuarioServiceImpl(UsuarioRepository usuarioRepository) {
         this.usuarioRepository = usuarioRepository;
     }
-    
+
+    @Override
+    public Usuario encontrarPorId(UUID id) {
+        return usuarioRepository.findById(id).orElse(null);
+    }
+
     @Override
     public Usuario buscarPorEmailouCpf(String email, String cpf) {
         UsuarioFiltroDto filtro = new UsuarioFiltroDto(email, cpf);

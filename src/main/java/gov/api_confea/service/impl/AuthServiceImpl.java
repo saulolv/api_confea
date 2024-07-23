@@ -1,3 +1,5 @@
+// src/main/java/gov/api_confea/service/impl/AuthServiceImpl.java
+
 package gov.api_confea.service.impl;
 
 import gov.api_confea.dtos.LoginRequestDto;
@@ -6,25 +8,29 @@ import gov.api_confea.model.Administrador;
 import gov.api_confea.model.Usuario;
 import gov.api_confea.service.AuthService;
 import gov.api_confea.service.UsuarioService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.util.UUID;
 
 @Service
 public class AuthServiceImpl implements AuthService {
 
-    private UsuarioService usuarioService;
-    private JwtEncoder jwtEncoder;
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final UsuarioService usuarioService;
+    private final JwtEncoder jwtEncoder;
+    private final JwtDecoder jwtDecoder;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public AuthServiceImpl(UsuarioService usuarioService, JwtEncoder jwtEncoder, BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public AuthServiceImpl(UsuarioService usuarioService, JwtEncoder jwtEncoder, JwtDecoder jwtDecoder, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.usuarioService = usuarioService;
         this.jwtEncoder = jwtEncoder;
+        this.jwtDecoder = jwtDecoder;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
@@ -33,7 +39,7 @@ public class AuthServiceImpl implements AuthService {
         Usuario usuario = usuarioService.buscarPorEmailouCpf(loginRequestDto.getEmail(), loginRequestDto.getCpf());
 
         if (usuario == null || !bCryptPasswordEncoder.matches(loginRequestDto.getSenha(), usuario.getSenha())) {
-            throw new IllegalArgumentException("Invalid credentials");
+            throw new IllegalArgumentException("Credenciais inválidas");
         }
 
         var now = Instant.now();
@@ -41,7 +47,7 @@ public class AuthServiceImpl implements AuthService {
 
         JwtClaimsSet.Builder claimsBuilder = JwtClaimsSet.builder()
                 .issuer("https://api-confea.gov.br")
-                .subject(usuario.getId().toString())
+                .subject(usuario.getId().toString()) // Armazena o UUID como String
                 .issuedAt(now)
                 .expiresAt(now.plusSeconds(expiresIn));
 
@@ -57,4 +63,19 @@ public class AuthServiceImpl implements AuthService {
         return new LoginResponse(jwtValue, expiresIn);
     }
 
+    @Override
+    public Usuario getUsuario(String token) {
+        // Decodificar o token JWT para obter o UUID do usuário
+        Jwt jwt = jwtDecoder.decode(token);
+        UUID userId = UUID.fromString(jwt.getSubject());
+
+        // Buscar o usuário completo pelo UUID
+        Usuario usuario = usuarioService.encontrarPorId(userId);
+
+        if (usuario == null) {
+            throw new IllegalArgumentException("Usuário não encontrado");
+        }
+
+        return usuario;
+    }
 }
