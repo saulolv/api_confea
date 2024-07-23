@@ -10,7 +10,7 @@ public class Profissional extends Usuario {
 
     @Id
     @GeneratedValue
-    private UUID rnp;
+    private Long rnp;
 
     @Column(nullable = false, length = 40, name="num_registro_crea")
     private String numRegistroCrea;
@@ -42,11 +42,22 @@ public class Profissional extends Usuario {
     @Column(name="nome_pai")
     private String nomePai;
 
+    @OneToOne(optional = true)
+    @JoinColumn(name = "codigo_titulo_eleitoral", referencedColumnName = "codigo")
+    private TituloEleitoral tituloEleitoral;
+
+    @OneToOne(optional = true)
+    @JoinColumn(name = "id_vinculo", referencedColumnName = "id")
+    private Vinculo vinculo;
+
+    @OneToOne(mappedBy = "profissional", cascade = CascadeType.ALL)
+    @JoinColumn(name = "codigo", referencedColumnName = "codigo")
+    private Carteira carteira;
+
 
     // Getters and Setters
 
-
-    public UUID getRnp() {
+    public Long getRnp() {
         return rnp;
     }
 
@@ -120,6 +131,30 @@ public class Profissional extends Usuario {
 
     public void setNomePai(String nomePai) {
         this.nomePai = nomePai;
+    }
+
+    public TituloEleitoral getTituloEleitoral() {
+        return tituloEleitoral;
+    }
+
+    public void setTituloEleitoral(TituloEleitoral tituloEleitoral) {
+        this.tituloEleitoral = tituloEleitoral;
+    }
+
+    public Vinculo getVinculo() {
+        return vinculo;
+    }
+
+    public void setVinculo(Vinculo vinculo) {
+        this.vinculo = vinculo;
+    }
+
+    public Carteira getCarteira() {
+        return carteira;
+    }
+
+    public void setCarteira(Carteira carteira) {
+        this.carteira = carteira;
     }
 }
 

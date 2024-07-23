@@ -59,8 +59,8 @@ public abstract class Usuario {
     @JoinColumn(name = "id_rg", referencedColumnName = "id")
     private Rg rg;
 
-    @ManyToOne
-    @JoinColumn(name = "codigo_crea")
+    @ManyToOne()
+    @JoinColumn(name = "codigo_crea", referencedColumnName = "codigo_crea")
     private Crea crea;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "usuario")
@@ -69,6 +69,162 @@ public abstract class Usuario {
 
     @Column(nullable = false, name="data_criacao")
     private final LocalDateTime dataCriacao = LocalDateTime.now();
+
+
+    protected Usuario() {
+    }
+
+    public Usuario(String nome, String email, String cpf, String senha, Sexo sexo, LocalDate dataNascimento, PNE pne, String nacionalidade, String cidadeNaturalidade, String ufNaturalidade, String paisNascimento, Rg rg, Crea crea, Set<Telefone> telefones) {
+        if(crea == null)
+            throw new IllegalArgumentException("CREA não pode ser nulo");
+
+        this.nome = nome;
+        this.email = email;
+        this.cpf = cpf;
+        this.senha = senha;
+        this.sexo = sexo;
+        this.dataNascimento = dataNascimento;
+        this.pne = pne;
+        this.nacionalidade = nacionalidade;
+        this.cidadeNaturalidade = cidadeNaturalidade;
+        this.ufNaturalidade = ufNaturalidade;
+        this.paisNascimento = paisNascimento;
+        this.rg = rg;
+        this.crea = crea;
+        this.telefones = telefones;
+    }
+
+
+    // Getters and Setters
+
+    public UUID getId() {
+        return id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public Sexo getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(Sexo sexo) {
+        this.sexo = sexo;
+    }
+
+    public LocalDate getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(LocalDate dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+
+    public String getNomeSocial() {
+        return nomeSocial;
+    }
+
+    public void setNomeSocial(String nomeSocial) {
+        this.nomeSocial = nomeSocial;
+    }
+
+    public PNE getPne() {
+        return pne;
+    }
+
+    public void setPne(PNE pne) {
+        this.pne = pne;
+    }
+
+    public String getNacionalidade() {
+        return nacionalidade;
+    }
+
+    public void setNacionalidade(String nacionalidade) {
+        this.nacionalidade = nacionalidade;
+    }
+
+    public String getCidadeNaturalidade() {
+        return cidadeNaturalidade;
+    }
+
+    public void setCidadeNaturalidade(String cidadeNaturalidade) {
+        this.cidadeNaturalidade = cidadeNaturalidade;
+    }
+
+    public String getUfNaturalidade() {
+        return ufNaturalidade;
+    }
+
+    public void setUfNaturalidade(String ufNaturalidade) {
+        this.ufNaturalidade = ufNaturalidade;
+    }
+
+    public String getPaisNascimento() {
+        return paisNascimento;
+    }
+
+    public void setPaisNascimento(String paisNascimento) {
+        this.paisNascimento = paisNascimento;
+    }
+
+    public Rg getRg() {
+        return rg;
+    }
+
+    public void setRg(Rg rg) {
+        this.rg = rg;
+    }
+
+    public Crea getCrea() {
+        return crea;
+    }
+
+    public void setCrea(Crea crea) {
+        this.crea = crea;
+    }
+
+    public Set<Telefone> getTelefones() {
+        return telefones;
+    }
+
+    public void setTelefones(Set<Telefone> telefones) {
+        this.telefones = telefones;
+    }
+
+    public LocalDateTime getDataCriacao() {
+        return dataCriacao;
+    }
+
 }
 
 enum Sexo {

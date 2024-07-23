@@ -1,23 +1,35 @@
 package gov.api_confea.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import java.util.UUID;
 
 @Entity
 @Table(name = "tb_administradores")
 public class Administrador extends Usuario {
 
-        private Cargo cargo;
+    @Id
+    @GeneratedValue
+    private UUID id;
 
-        // Getters and Setters
+    @Enumerated
+    private Cargo cargo;
 
-        public Cargo getCargo() {
-            return cargo;
-        }
+    // Getters and Setters
 
-        public void setCargo(Cargo cargo) {
-            this.cargo = cargo;
-        }
+
+    @Override
+    public UUID getId() {
+        return id;
+    }
+
+    public Cargo getCargo() {
+        return cargo;
+    }
+
+    public void setCargo(Cargo cargo) {
+        this.cargo = cargo;
+    }
 }
 
 enum Cargo {

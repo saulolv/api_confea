@@ -3,10 +3,15 @@ package gov.api_confea.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 @Table(name = "tb_enderecos_crea")
 public class EnderecoCrea extends Endereco {
+
+    @Id
+    @GeneratedValue
+    private UUID id;
 
     @Column(nullable = false, length = 30)
     private LocalDateTime inicioExpediente;
@@ -20,6 +25,19 @@ public class EnderecoCrea extends Endereco {
 
 
     // Getters and Setters
+
+    @Override
+    public UUID getId() {
+        return id;
+    }
+
+    public Crea getCrea() {
+        return crea;
+    }
+
+    public void setCrea(Crea crea) {
+        this.crea = crea;
+    }
 
     public LocalDateTime getInicioExpediente() {
         return inicioExpediente;
