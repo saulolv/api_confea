@@ -47,7 +47,7 @@ public class AuthServiceImpl implements AuthService {
 
         JwtClaimsSet.Builder claimsBuilder = JwtClaimsSet.builder()
                 .issuer("https://api-confea.gov.br")
-                .subject(usuario.getId().toString()) // Armazena o UUID como String
+                .subject(usuario.getId().toString())
                 .issuedAt(now)
                 .expiresAt(now.plusSeconds(expiresIn));
 
@@ -65,11 +65,10 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public Usuario getUsuario(String token) {
-        // Decodificar o token JWT para obter o UUID do usuário
+
         Jwt jwt = jwtDecoder.decode(token);
         UUID userId = UUID.fromString(jwt.getSubject());
 
-        // Buscar o usuário completo pelo UUID
         Usuario usuario = usuarioService.encontrarPorId(userId);
 
         if (usuario == null) {

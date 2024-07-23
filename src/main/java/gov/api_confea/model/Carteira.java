@@ -1,8 +1,11 @@
 package gov.api_confea.model;
 
+import gov.api_confea.model.academico.Titulo;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_carteiras")
@@ -64,6 +67,14 @@ public class Carteira {
     @OneToOne(optional = false)
     @JoinColumn(name = "rnp_profissional", referencedColumnName = "rnp")
     private Profissional profissional;
+
+    @ManyToMany
+    @JoinTable(
+            name = "carteiras_titulos",
+            joinColumns = @JoinColumn(name = "codigo_carteira"),
+            inverseJoinColumns = @JoinColumn(name = "codigo_titulo")
+    )
+    private Set<Titulo> titulos = new HashSet<>();
 
     protected Carteira() {
     }
@@ -219,6 +230,25 @@ public class Carteira {
     public void setProfissional(Profissional profissional) {
         this.profissional = profissional;
     }
+
+    public Set<Titulo> getTitulos() {
+        return titulos;
+    }
+
+    public void setTitulos(Set<Titulo> titulos) {
+        this.titulos = titulos;
+    }
+
+    public void addTitulo(Titulo titulo) {
+        this.titulos.add(titulo);
+        titulo.getCarteiras().add(this);
+    }
+
+    public void removeTitulo(Titulo titulo) {
+        this.titulos.remove(titulo);
+        titulo.getCarteiras().remove(this);
+    }
+
 }
 
 enum StatusSituacao {

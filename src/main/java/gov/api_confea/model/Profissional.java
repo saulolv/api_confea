@@ -1,7 +1,10 @@
 package gov.api_confea.model;
 
+import gov.api_confea.model.academico.Grade;
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -53,6 +56,13 @@ public class Profissional extends Usuario {
     @JoinColumn(name = "codigo", referencedColumnName = "codigo")
     private Carteira carteira;
 
+    @ManyToMany
+    @JoinTable(
+        name = "profissionais_grades",
+        joinColumns = @JoinColumn(name = "id_profissional"),
+        inverseJoinColumns = @JoinColumn(name = "id_grade")
+    )
+    private Set<Grade> grades = new HashSet<>();
 
     // Getters and Setters
 
@@ -154,6 +164,30 @@ public class Profissional extends Usuario {
 
     public void setCarteira(Carteira carteira) {
         this.carteira = carteira;
+    }
+
+    public void setRnp(String rnp) {
+        this.rnp = rnp;
+    }
+
+    public Set<Grade> getGrades() {
+        return grades;
+    }
+
+    public void setGrades(Set<Grade> grades) {
+        this.grades = grades;
+    }
+
+
+
+    public void addGrade(Grade grade) {
+        this.grades.add(grade);
+        grade.getProfissionais().add(this);
+    }
+
+    public void removeGrade(Grade grade) {
+        this.grades.remove(grade);
+        grade.getProfissionais().remove(this);
     }
 }
 
