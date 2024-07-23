@@ -2,13 +2,14 @@ package gov.api_confea.model;
 
 import gov.api_confea.model.academico.Grade;
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 
 @Entity
 @Table(name = "tb_profissionais")
+@Data
 public class Profissional extends Usuario {
 
     @Column(nullable = false, name="rnp", unique = true)
@@ -64,120 +65,9 @@ public class Profissional extends Usuario {
     )
     private Set<Grade> grades = new HashSet<>();
 
-    // Getters and Setters
-
-    public String getRnp() {
-        return rnp;
-    }
-
-    public String getNumRegistroCrea() {
-        return numRegistroCrea;
-    }
-
-    public void setNumRegistroCrea(String numRegistroCrea) {
-        this.numRegistroCrea = numRegistroCrea;
-    }
-
-    public TipoNumeroCarteira getTipoNumeroCarteira() {
-        return tipoNumeroCarteira;
-    }
-
-    public void setTipoNumeroCarteira(TipoNumeroCarteira tipoNumeroCarteira) {
-        this.tipoNumeroCarteira = tipoNumeroCarteira;
-    }
-
-    public EstadoCivil getEstadoCivil() {
-        return estadoCivil;
-    }
-
-    public void setEstadoCivil(EstadoCivil estadoCivil) {
-        this.estadoCivil = estadoCivil;
-    }
-
-    public TipoSanguineo getTipoSanguineo() {
-        return tipoSanguineo;
-    }
-
-    public void setTipoSanguineo(TipoSanguineo tipoSanguineo) {
-        this.tipoSanguineo = tipoSanguineo;
-    }
-
-    public FatorRh getFatorRh() {
-        return fatorRh;
-    }
-
-    public void setFatorRh(FatorRh fatorRh) {
-        this.fatorRh = fatorRh;
-    }
-
-    public Boolean getDoadorOrgaos() {
-        return doadorOrgaos;
-    }
-
-    public void setDoadorOrgaos(Boolean doadorOrgaos) {
-        this.doadorOrgaos = doadorOrgaos;
-    }
-
-    public String getWebsite() {
-        return website;
-    }
-
-    public void setWebsite(String website) {
-        this.website = website;
-    }
-
-    public String getNomeMae() {
-        return nomeMae;
-    }
-
-    public void setNomeMae(String nomeMae) {
-        this.nomeMae = nomeMae;
-    }
-
-    public String getNomePai() {
-        return nomePai;
-    }
-
-    public void setNomePai(String nomePai) {
-        this.nomePai = nomePai;
-    }
-
-    public TituloEleitoral getTituloEleitoral() {
-        return tituloEleitoral;
-    }
-
-    public void setTituloEleitoral(TituloEleitoral tituloEleitoral) {
-        this.tituloEleitoral = tituloEleitoral;
-    }
-
-    public Vinculo getVinculo() {
-        return vinculo;
-    }
-
-    public void setVinculo(Vinculo vinculo) {
-        this.vinculo = vinculo;
-    }
-
-    public Carteira getCarteira() {
-        return carteira;
-    }
-
-    public void setCarteira(Carteira carteira) {
-        this.carteira = carteira;
-    }
-
-    public void setRnp(String rnp) {
-        this.rnp = rnp;
-    }
-
     public Set<Grade> getGrades() {
-        return grades;
+        return this.grades;
     }
-
-    public void setGrades(Set<Grade> grades) {
-        this.grades = grades;
-    }
-
 
 
     public void addGrade(Grade grade) {

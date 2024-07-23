@@ -1,11 +1,13 @@
 package gov.api_confea.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.Set;
 
 @Entity
 @Table(name = "tb_creas")
+@Data
 public class Crea {
 
     @Id

@@ -1,11 +1,13 @@
 package gov.api_confea.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.UUID;
 
 @Entity
 @Table(name="tb_telefones")
+@Data
 public class Telefone {
 
     @Id

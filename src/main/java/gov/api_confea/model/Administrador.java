@@ -1,25 +1,17 @@
 package gov.api_confea.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.UUID;
 
 @Entity
 @Table(name = "tb_administradores")
+@Data
 public class Administrador extends Usuario {
 
     @Enumerated
     private Cargo cargo;
-
-    // Getters and Setters
-
-    public Cargo getCargo() {
-        return cargo;
-    }
-
-    public void setCargo(Cargo cargo) {
-        this.cargo = cargo;
-    }
 }
 
 enum Cargo {

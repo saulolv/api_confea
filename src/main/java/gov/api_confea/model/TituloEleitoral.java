@@ -1,12 +1,15 @@
 package gov.api_confea.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 @Entity
 @Table(name = "tb_titulos_eleitorais")
+@Data
 public class TituloEleitoral {
 
     @Id
+    @Column(unique = true, nullable = false)
     private Long codigo;
 
     private String zona;
@@ -14,46 +17,6 @@ public class TituloEleitoral {
     private String municipio;
     private String uf;
 
-    // Getters and Setters
-
-
-    public Long getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(Long codigo) {
-        this.codigo = codigo;
-    }
-
-    public String getZona() {
-        return zona;
-    }
-
-    public String getSecao() {
-        return secao;
-    }
-
-    public String getMunicipio() {
-        return municipio;
-    }
-
-    public String getUf() {
-        return uf;
-    }
-
-    public void setZona(String zona) {
-        this.zona = zona;
-    }
-
-    public void setSecao(String secao) {
-        this.secao = secao;
-    }
-
-    public void setMunicipio(String municipio) {
-        this.municipio = municipio;
-    }
-
-    public void setUf(String uf) {
-        this.uf = uf;
-    }
+    @OneToOne(mappedBy = "tituloEleitoral")
+    private Usuario usuario;
 }

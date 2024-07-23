@@ -1,17 +1,19 @@
 package gov.api_confea.model.academico;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "tb_modalidades")
+@Data
 public class Modalidade {
 
     @Id
     @Column(nullable = false, unique = true)
-    private int codigo;
+    private Integer codigo;
 
     @Column(nullable = false)
     private String nome;
@@ -22,37 +24,4 @@ public class Modalidade {
     @ManyToOne
     @JoinColumn(name = "codigo_grupo", referencedColumnName = "codigo")
     private Grupo grupo;
-
-    public int getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public Set<Titulo> getTitulos() {
-        return titulos;
-    }
-
-    public void setTitulos(Set<Titulo> titulos) {
-        this.titulos = titulos;
-    }
-
-    public Grupo getGrupo() {
-        return grupo;
-    }
-
-    public void setGrupo(Grupo grupo) {
-        this.grupo = grupo;
-    }
-
 }
