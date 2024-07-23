@@ -4,6 +4,11 @@ spring:
     username: postgres
     password: mQevBddhwPOiAjVIxsOTOVrRrDmhLuqY
     driver-class-name: org.postgresql.Driver
+
+  security:
+    jwt:
+      public-key-path: classpath:app.pub
+      private-key-path: classpath:app.key
   jpa:
     hibernate:
       ddl-auto: update
