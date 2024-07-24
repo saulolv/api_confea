@@ -36,7 +36,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public LoginResponse authenticate(LoginRequestDto loginRequestDto) {
-        Usuario usuario = usuarioService.buscarPorEmailouCpf(loginRequestDto.getEmail(), loginRequestDto.getCpf());
+        Usuario usuario = usuarioService.buscarPorEmailouCpf(loginRequestDto.getLogin());
 
         if (usuario == null || !bCryptPasswordEncoder.matches(loginRequestDto.getSenha(), usuario.getSenha())) {
             throw new IllegalArgumentException("Credenciais inválidas");

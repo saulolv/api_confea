@@ -8,7 +8,6 @@ import java.util.UUID;
 
 @Entity
 @Table(name="tb_telefones")
-@Data
 public class Telefone {
 
     @Id
@@ -34,6 +33,66 @@ public class Telefone {
     @JoinColumn(name = "id_crea")
     @JsonBackReference
     private Crea crea;
+
+    public UUID getId() {
+        return id;
+    }
+
+    public String getDdd() {
+        return ddd;
+    }
+
+    public void setDdd(String ddd) {
+        this.ddd = ddd;
+    }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    public TipoTelefone getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(TipoTelefone tipo) {
+        this.tipo = tipo;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Crea getCrea() {
+        return crea;
+    }
+
+    public void setCrea(Crea crea) {
+        this.crea = crea;
+    }
+
+    public void setTipoTelefoneResidencial() {
+        this.tipo = TipoTelefone.RESIDENCIAL;
+    }
+
+    public void setTipoTelefoneComercial() {
+        this.tipo = TipoTelefone.COMERCIAL;
+    }
+
+    public void setTipoTelefoneCelular() {
+        this.tipo = TipoTelefone.CELULAR;
+    }
+
+    public void setTipoTelefoneRecado() {
+        this.tipo = TipoTelefone.RECADO;
+    }
 }
 
 enum TipoTelefone {

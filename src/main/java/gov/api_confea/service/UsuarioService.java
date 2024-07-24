@@ -6,5 +6,5 @@ import java.util.UUID;
 
 public interface UsuarioService {
     Usuario encontrarPorId(UUID id);
-    Usuario buscarPorEmailouCpf(String email, String cpf);
+    Usuario buscarPorEmailouCpf(String login);
 }

@@ -1,5 +1,7 @@
 package gov.api_confea.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import gov.api_confea.model.academico.Grade;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -30,7 +32,6 @@ public class Profissional extends Usuario {
     @Column(nullable = false, name="nome_mae")
     private String nomeMae;
 
-
     @Enumerated
     @Column(name="tipo_sanguineo")
     private TipoSanguineo tipoSanguineo;
@@ -47,16 +48,18 @@ public class Profissional extends Usuario {
     @Column(name="nome_pai")
     private String nomePai;
 
-    @OneToOne(optional = true)
-    @JoinColumn(name = "codigo_titulo_eleitoral", referencedColumnName = "codigo")
+    @OneToOne(mappedBy = "profissional", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private TituloEleitoral tituloEleitoral;
 
     @OneToOne(optional = true)
     @JoinColumn(name = "id_vinculo", referencedColumnName = "id")
+    @JsonManagedReference
     private Vinculo vinculo;
 
     @OneToOne(mappedBy = "profissional", cascade = CascadeType.ALL)
     @JoinColumn(name = "codigo", referencedColumnName = "codigo")
+    @JsonManagedReference
     private Carteira carteira;
 
     @ManyToMany
@@ -251,8 +254,6 @@ public class Profissional extends Usuario {
         this.grades.remove(grade);
         grade.getProfissionais().remove(this);
     }
-
-
 
 }
 

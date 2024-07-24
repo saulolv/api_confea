@@ -3,16 +3,12 @@ package gov.api_confea.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
-
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -84,7 +80,7 @@ public abstract class Usuario {
     private final LocalDateTime dataCriacao = LocalDateTime.now();
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
-    private Set<EnderecoUsuario> enderecos;
+    private Set<EnderecoUsuario> enderecos = new HashSet<>();
 
     protected Usuario() {
     }
@@ -272,7 +268,6 @@ public abstract class Usuario {
     public String getSenha() {
         return this.senha;
     }
-
 }
 
 enum Sexo {

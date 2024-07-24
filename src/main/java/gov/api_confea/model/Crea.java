@@ -31,7 +31,6 @@ public class Crea {
     private String assinaturaPresidente; // revisar tipo
 
     @OneToMany(mappedBy = "crea", cascade = CascadeType.ALL)
-    @JsonManagedReference
     private Set<EnderecoCrea> enderecos;
 
     @OneToMany(mappedBy = "crea", cascade = CascadeType.ALL)

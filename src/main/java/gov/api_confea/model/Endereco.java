@@ -69,7 +69,6 @@ public abstract class Endereco {
         return id;
     }
 
-
     public String getNome() {
         return nome;
     }
@@ -85,6 +84,7 @@ public abstract class Endereco {
     public void setCep(String cep) {
         this.cep = cep;
     }
+
 
     public String getUf() {
         return uf;

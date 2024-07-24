@@ -1,27 +1,17 @@
 package gov.api_confea.dtos;
 
 public class UsuarioFiltroDto {
-    private String cpf;
-    private String email;
+    private String login;
 
-    public UsuarioFiltroDto(String email, String cpf) {
-        this.email = email;
-        this.cpf = cpf;
+    public UsuarioFiltroDto(String login) {
+        this.login = login;
     }
 
-    public String getCpf() {
-        return cpf;
+    public String getLogin() {
+        return login;
     }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    public void setLogin(String login) {
+        this.login = login;
     }
 }
