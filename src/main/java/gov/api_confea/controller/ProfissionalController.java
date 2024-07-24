@@ -10,8 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/profissionais")
-public class ProfissionalController {
+public class ProfissionalController extends BaseController {
 
     private final ProfissionalService profissionalService;
 
@@ -19,7 +18,7 @@ public class ProfissionalController {
         this.profissionalService = profissionalService;
     }
 
-    @GetMapping("/listar")
+    @GetMapping("profissionais/listar")
     public ResponseEntity<Page<Profissional>> listarProfissionais(ProfissionalFiltroDto profissionalFiltroDto) {
         Page<Profissional> profissionais = profissionalService.listarProfissionais(profissionalFiltroDto);
 

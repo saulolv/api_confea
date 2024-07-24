@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-public class TokenController {
+public class TokenController extends BaseController {
 
     private final AuthService authService;
 
