@@ -2,48 +2,93 @@
 
 ## Visão Geral
 
-Este projeto é uma aplicação Spring Boot desenvolvida para a gestão profissional dos títulos, carteiras e universidades no contexto do CONFEA (Conselho Federal de Engenharia e Agronomia). A aplicação permite o cadastro, atualização, remoção e consulta de informações relacionadas a cursos, títulos acadêmicos, carteiras profissionais e universidades.
+A **API CONFEA** é uma aplicação centralizada desenvolvida com Spring Boot para gerenciar o sistema dos CREAs (Conselhos Regionais de Engenharia e Agronomia). Esta API visa unificar e centralizar a gestão de informações relacionadas a títulos acadêmicos, carteiras profissionais e instituições de ensino em um sistema robusto e integrado.
+
+### Funcionalidades Principais
+
+
+- **Cadastro e Gerenciamento de Títulos Acadêmicos**: Permite aos administradores e profissionais adicionar, atualizar e consultar títulos acadêmicos. Administradores podem gerenciar títulos no sistema, enquanto profissionais podem visualizar e atualizar suas próprias informações acadêmicas.
+
+- **Gestão de Carteiras Profissionais**: Os administradores podem emitir, atualizar e revogar carteiras profissionais. Profissionais podem visualizar o status de suas carteiras e atualizá-las conforme necessário.
+
+- **Autenticação e Autorização**: A API protege seus endpoints com autenticação OAuth2 e autorização via Spring Security. Isso garante que apenas usuários autenticados e autorizados, como administradores e profissionais com permissões adequadas, possam acessar e modificar informações sensíveis.
+
+- **Visualização de Dados e Relatórios**: Oferece aos administradores a capacidade de gerar relatórios e visualizar dados agregados sobre títulos acadêmicos, carteiras profissionais e instituições de ensino, facilitando a tomada de decisões e a gestão eficiente dos recursos do CREA.
+
 
 ## Tecnologias Utilizadas
 
-- Java 21
-- Spring Boot 3.3.2
-- Gradle
-- Spring Data JPA
-- Spring Security
-- OAuth2
-- Swagger para documentação da API
-- Lombok
-- PostgreSQL
+- **Java 17**: Linguagem de programação utilizada.
+- **Spring Boot 3.3.2**: Framework para desenvolvimento da aplicação.
+- **Gradle**: Ferramenta de automação de construção.
+- **Spring Data JPA**: ORM para interação com o banco de dados.
+- **Spring Security**: Framework para segurança e autenticação.
+- **OAuth2**: Protocolo de autorização para proteger recursos.
+- **Swagger**: Ferramenta para documentação e testes da API.
+- **Lombok**: Biblioteca para reduzir o código boilerplate.
+- **PostgreSQL**: Sistema de gerenciamento de banco de dados relacional.
+- **Docker**: Plataforma para desenvolvimento, envio e execução de aplicações em contêineres.
 
 ## Configuração do Projeto
 
 ### Pré-requisitos
 
-- JDK 21
-- Gradle
-- PostgreSQL
+- **JDK 17**: Instalado e configurado no seu ambiente.
+- **Gradle**: Para construção e execução do projeto.
+- **PostgreSQL**: Servidor de banco de dados para armazenar os dados da aplicação.
 
 ### Passos para Configuração
 
-1. Clone o repositório do projeto.
-2. Configure o PostgreSQL criando um banco de dados para o projeto.
-3. Atualize o arquivo `src/main/resources/application.properties` com as configurações do seu banco de dados (URL, usuário e senha).
-4. Execute o comando `gradle bootRun` para iniciar a aplicação.
+1. **Clone o Repositório**:
+   ```bash
+   git clone <URL-do-repositório>
+    ```
+2. **Acesse o Diretório**:
+3. **Construa o Projeto**:
+   ```bash
+   gradle build
+   ```
+4. **Execute a Aplicação**:
+   ```bash
+    gradle bootRun
+    ```
 
-## Estrutura do Projeto
 
-O projeto está organizado nas seguintes pacotes principais:
 
-- `model`: Contém as classes de entidade que representam as tabelas do banco de dados.
-- `repository`: Contém as interfaces do Spring Data JPA para operações CRUD nas entidades.
-- `service`: Contém a lógica de negócio e a interação com os repositórios.
-- `controller`: Contém os controladores que expõem endpoints da API REST.
+## Utilizando Docker para execução
 
-## Endpoints da API
+Para executar o projeto API CONFEA utilizando Docker, siga os passos abaixo:
 
-A documentação detalhada dos endpoints da API está disponível através do Swagger, acessível em `http://localhost:8080/swagger-ui.html` após iniciar a aplicação.
+1. **Preparação do Ambiente**:
+   - Certifique-se de que o Docker e o Docker Compose estão instalados em seu sistema.
+   - Clone o repositório do projeto para sua máquina local.
 
-## Segurança
+2. **Construção da Imagem Docker**:
+   - Abra um terminal e navegue até o diretório raiz do projeto.
+   - Execute o comando abaixo para construir a imagem Docker do projeto:
+     ```bash
+     docker build -t api-confea .
+     ```
 
-A aplicação utiliza Spring Security e OAuth2 para autenticação e autorização, garantindo que apenas usuários autenticados possam acessar determinados endpoints.
+3. **Execução com Docker Compose**:
+   - Utilize o arquivo `docker-compose.yml` para configurar e iniciar os serviços necessários (aplicação e banco de dados).
+   - No diretório raiz do projeto, execute o comando:
+     ```bash
+     docker-compose up
+     ```
+   - Este comando irá iniciar todos os serviços definidos no `docker-compose.yml`, incluindo a aplicação e o banco de dados.
+
+4. **Acesso à Aplicação**:
+   - Após os contêineres estarem em execução, a aplicação estará acessível através do navegador ou cliente HTTP no endereço configurado (por padrão, `http://localhost:8080`).
+
+5. **Encerramento da Aplicação**:
+   - Para encerrar a aplicação e os serviços associados, utilize o comando:
+     ```bash
+     docker-compose down
+     ```
+   - Este comando irá parar e remover os contêineres criados pelo Docker Compose.
+
+### Notas Adicionais
+- Para reconstruir a imagem Docker após alterações no código, repita o passo 2.
+- Utilize o Docker Compose para facilitar a gestão de múltiplos contêineres e serviços.
+
