@@ -4,18 +4,6 @@
 
 A **API CONFEA** é uma aplicação centralizada desenvolvida com Spring JAVA para gerenciar o sistema dos CREAs (Conselhos Regionais de Engenharia e Agronomia). Esta API visa unificar e centralizar a gestão de informações relacionadas aos profissionais.
 
-### Funcionalidades Principais
-
-
-- **Cadastro e Gerenciamento de Títulos Acadêmicos**: Permite aos administradores e profissionais adicionar, atualizar e consultar títulos acadêmicos. Administradores podem gerenciar títulos no sistema, enquanto profissionais podem visualizar e atualizar suas próprias informações acadêmicas.
-
-- **Gestão de Carteiras Profissionais**: Os administradores podem emitir, atualizar e revogar carteiras profissionais. Profissionais podem visualizar o status de suas carteiras e atualizá-las conforme necessário.
-
-- **Autenticação e Autorização**: A API protege seus endpoints com autenticação OAuth2 e autorização via Spring Security. Isso garante que apenas usuários autenticados e autorizados, como administradores e profissionais com permissões adequadas, possam acessar e modificar informações sensíveis.
-
-- **Visualização de Dados e Relatórios**: Oferece aos administradores a capacidade de gerar relatórios e visualizar dados agregados sobre títulos acadêmicos, carteiras profissionais e instituições de ensino, facilitando a tomada de decisões e a gestão eficiente dos recursos do CREA.
-
-
 ## Tecnologias Utilizadas
 
 - **Java 17**: Linguagem de programação utilizada.
