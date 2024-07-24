@@ -36,7 +36,17 @@ public class SecurityConfiguration {
         http
                 .authorizeHttpRequests(authrorize -> authrorize
                         .requestMatchers(HttpMethod.POST, "/login").permitAll()
-                        .requestMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**", "/webjars/**").permitAll()
+                        .requestMatchers(// -- Swagger UI v2
+                                "/v2/api-docs",
+                                "/swagger-resources",
+                                "/swagger-resources/**",
+                                "/configuration/ui",
+                                "/configuration/security",
+                                "/swagger-ui.html",
+                                "/webjars/**",
+                                // -- Swagger UI v3 (OpenAPI)
+                                "/v3/api-docs/**",
+                                "/swagger-ui/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/profissionais/listar").permitAll()
                         .anyRequest().authenticated())
                 .csrf(csrf -> csrf.disable())
