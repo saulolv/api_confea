@@ -70,6 +70,9 @@ public class Profissional extends Usuario {
     )
     private Set<Grade> grades = new HashSet<>();
 
+    @OneToMany(mappedBy = "profissional", cascade = CascadeType.ALL)
+    private Set<Art> arts = new HashSet<>();
+
     public Set<Grade> getGrades() {
         return this.grades;
     }
@@ -177,6 +180,14 @@ public class Profissional extends Usuario {
         this.tituloEleitoral = tituloEleitoral;
     }
 
+    public Set<Art> getArts() {
+        return arts;
+    }
+
+    public void setArts(Set<Art> arts) {
+        this.arts = arts;
+    }
+
     public Vinculo getVinculo() {
         return vinculo;
     }
@@ -256,8 +267,6 @@ public class Profissional extends Usuario {
     }
 
 }
-
-// Revisar enums
 
 enum TipoNumeroCarteira {
     CREA,
