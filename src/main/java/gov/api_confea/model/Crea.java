@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -31,11 +32,22 @@ public class Crea {
     private String assinaturaPresidente; // revisar tipo
 
     @OneToMany(mappedBy = "crea", cascade = CascadeType.ALL)
-    private Set<EnderecoCrea> enderecos;
+    private Set<EnderecoCrea> enderecos = new HashSet<>();
 
     @OneToMany(mappedBy = "crea", cascade = CascadeType.ALL)
     @JsonManagedReference
-    private Set<Usuario> usuarios;
+    private Set<Usuario> usuarios = new HashSet<>();
+
+    @OneToMany(mappedBy = "crea", cascade = CascadeType.ALL)
+    private Set<Art> arts = new HashSet<>();
+
+    public Set<Art> getArts() {
+        return arts;
+    }
+
+    public void setArts(Set<Art> arts) {
+        this.arts = arts;
+    }
 
     public String getCodigoCrea() {
         return codigoCrea;
