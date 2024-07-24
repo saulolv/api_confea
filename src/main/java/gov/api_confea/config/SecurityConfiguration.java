@@ -35,7 +35,7 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authrorize -> authrorize
-                        .requestMatchers(HttpMethod.POST, "/login").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/v1/login").permitAll()
                         .requestMatchers(// -- Swagger UI v2
                                 "/v2/api-docs",
                                 "/swagger-resources",
@@ -47,7 +47,7 @@ public class SecurityConfiguration {
                                 // -- Swagger UI v3 (OpenAPI)
                                 "/v3/api-docs/**",
                                 "/swagger-ui/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/profissionais/listar").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/v1/profissionais/listar").permitAll()
                         .anyRequest().authenticated())
                 .csrf(csrf -> csrf.disable())
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
