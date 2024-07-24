@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  app:
+    image: api-confea
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://monorail.proxy.rlwy.net:25236/railway
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: mQevBddhwPOiAjVIxsOTOVrRrDmhLuqY
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_SHOW_SQL: "true"
+      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.PostgreSQLDialect
+      SPRING_SECURITY_JWT_PUBLIC_KEY_PATH: classpath:app.pub
+      SPRING_SECURITY_JWT_PRIVATE_KEY_PATH: classpath:app.key
+    networks:
+      - app-network
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15.3
+    environment:
+      POSTGRES_DB: railway
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mQevBddhwPOiAjVIxsOTOVrRrDmhLuqY
+    ports:
+      - "5433:5432"
+    networks:
+      - app-network
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  db-data:
