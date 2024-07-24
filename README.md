@@ -2,7 +2,7 @@
 
 ## Visão Geral
 
-A **API CONFEA** é uma aplicação centralizada desenvolvida com Spring Boot para gerenciar o sistema dos CREAs (Conselhos Regionais de Engenharia e Agronomia). Esta API visa unificar e centralizar a gestão de informações relacionadas aos profissionais.
+A **API CONFEA** é uma aplicação centralizada desenvolvida com Spring JAVA para gerenciar o sistema dos CREAs (Conselhos Regionais de Engenharia e Agronomia). Esta API visa unificar e centralizar a gestão de informações relacionadas aos profissionais.
 
 ### Funcionalidades Principais
 
