@@ -3,13 +3,14 @@ package gov.api_confea.model;
 import gov.api_confea.model.academico.Grade;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "tb_profissionais")
-@Data
 public class Profissional extends Usuario {
 
     @Column(nullable = false, name="rnp", unique = true)
@@ -26,6 +27,10 @@ public class Profissional extends Usuario {
     @Column(nullable = false, name="estado_civil")
     private EstadoCivil estadoCivil;
 
+    @Column(nullable = false, name="nome_mae")
+    private String nomeMae;
+
+
     @Enumerated
     @Column(name="tipo_sanguineo")
     private TipoSanguineo tipoSanguineo;
@@ -38,9 +43,6 @@ public class Profissional extends Usuario {
     private Boolean doadorOrgaos;
 
     private String website;
-
-    @Column(nullable = false, name="nome_mae")
-    private String nomeMae;
 
     @Column(name="nome_pai")
     private String nomePai;
@@ -69,6 +71,176 @@ public class Profissional extends Usuario {
         return this.grades;
     }
 
+    public Profissional() {
+    }
+
+    public Profissional(String nome, String email, String cpf, String senha, Sexo sexo, LocalDate dataNascimento, PNE pne, String nacionalidade, String cidadeNaturalidade, String ufNaturalidade, String paisNascimento, Rg rg, Crea crea, Set<Telefone> telefones, String rnp, String numRegistroCrea, TipoNumeroCarteira tipoNumeroCarteira, EstadoCivil estadoCivil, String nomeMae, Carteira carteira) {
+        super(nome, email, cpf, senha, sexo, dataNascimento, pne, nacionalidade, cidadeNaturalidade, ufNaturalidade, paisNascimento, rg, crea, telefones);
+        this.rnp = rnp;
+        this.numRegistroCrea = numRegistroCrea;
+        this.tipoNumeroCarteira = tipoNumeroCarteira;
+        this.estadoCivil = estadoCivil;
+        this.nomeMae = nomeMae;
+        this.carteira = carteira;
+    }
+
+    public String getRnp() {
+        return rnp;
+    }
+
+    public void setRnp(String rnp) {
+        this.rnp = rnp;
+    }
+
+    public String getNumRegistroCrea() {
+        return numRegistroCrea;
+    }
+
+    public void setNumRegistroCrea(String numRegistroCrea) {
+        this.numRegistroCrea = numRegistroCrea;
+    }
+
+    public TipoNumeroCarteira getTipoNumeroCarteira() {
+        return tipoNumeroCarteira;
+    }
+
+    public void setTipoNumeroCarteira(TipoNumeroCarteira tipoNumeroCarteira) {
+        this.tipoNumeroCarteira = tipoNumeroCarteira;
+    }
+
+    public EstadoCivil getEstadoCivil() {
+        return estadoCivil;
+    }
+
+    public void setEstadoCivil(EstadoCivil estadoCivil) {
+        this.estadoCivil = estadoCivil;
+    }
+
+    public String getNomeMae() {
+        return nomeMae;
+    }
+
+    public void setNomeMae(String nomeMae) {
+        this.nomeMae = nomeMae;
+    }
+
+    public TipoSanguineo getTipoSanguineo() {
+        return tipoSanguineo;
+    }
+
+    public void setTipoSanguineo(TipoSanguineo tipoSanguineo) {
+        this.tipoSanguineo = tipoSanguineo;
+    }
+
+    public FatorRh getFatorRh() {
+        return fatorRh;
+    }
+
+    public void setFatorRh(FatorRh fatorRh) {
+        this.fatorRh = fatorRh;
+    }
+
+    public Boolean getDoadorOrgaos() {
+        return doadorOrgaos;
+    }
+
+    public void setDoadorOrgaos(Boolean doadorOrgaos) {
+        this.doadorOrgaos = doadorOrgaos;
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
+    }
+
+    public String getNomePai() {
+        return nomePai;
+    }
+
+    public void setNomePai(String nomePai) {
+        this.nomePai = nomePai;
+    }
+
+    @Override
+    public TituloEleitoral getTituloEleitoral() {
+        return tituloEleitoral;
+    }
+
+    @Override
+    public void setTituloEleitoral(TituloEleitoral tituloEleitoral) {
+        this.tituloEleitoral = tituloEleitoral;
+    }
+
+    public Vinculo getVinculo() {
+        return vinculo;
+    }
+
+    public void setVinculo(Vinculo vinculo) {
+        this.vinculo = vinculo;
+    }
+
+    public Carteira getCarteira() {
+        return carteira;
+    }
+
+    public void setCarteira(Carteira carteira) {
+        this.carteira = carteira;
+    }
+
+    public void setGrades(Set<Grade> grades) {
+        this.grades = grades;
+    }
+
+    public void setTipoNumeroCarteiraCrea() {
+        this.tipoNumeroCarteira = TipoNumeroCarteira.CREA;
+    }
+
+    public void setTipoNumeroCarteiraConfea() {
+        this.tipoNumeroCarteira = TipoNumeroCarteira.CONFEA;
+    }
+
+    public void setEstadoCivilSolteiro() {
+        this.estadoCivil = EstadoCivil.SOLTEIRO;
+    }
+
+    public void setEstadoCivilCasado() {
+        this.estadoCivil = EstadoCivil.CASADO;
+    }
+
+    public void setEstadoCivilDivorciado() {
+        this.estadoCivil = EstadoCivil.DIVORCIADO;
+    }
+
+    public void setEstadoCivilViuvo() {
+        this.estadoCivil = EstadoCivil.VIUVO;
+    }
+
+    public void setTipoSanguineoA() {
+        this.tipoSanguineo = TipoSanguineo.A;
+    }
+
+    public void setTipoSanguineoB() {
+        this.tipoSanguineo = TipoSanguineo.B;
+    }
+
+    public void setTipoSanguineoAB() {
+        this.tipoSanguineo = TipoSanguineo.AB;
+    }
+
+    public void setTipoSanguineoO() {
+        this.tipoSanguineo = TipoSanguineo.O;
+    }
+
+    public void setFatorRhPositivo() {
+        this.fatorRh = FatorRh.POSITIVO;
+    }
+
+    public void setFatorRhNegativo() {
+        this.fatorRh = FatorRh.NEGATIVO;
+    }
 
     public void addGrade(Grade grade) {
         this.grades.add(grade);
@@ -79,6 +251,9 @@ public class Profissional extends Usuario {
         this.grades.remove(grade);
         grade.getProfissionais().remove(this);
     }
+
+
+
 }
 
 // Revisar enums

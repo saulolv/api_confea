@@ -1,13 +1,15 @@
 package gov.api_confea.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Set;
 
 @Entity
 @Table(name = "tb_creas")
-@Data
 public class Crea {
 
     @Id
@@ -29,9 +31,11 @@ public class Crea {
     private String assinaturaPresidente; // revisar tipo
 
     @OneToMany(mappedBy = "crea", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private Set<EnderecoCrea> enderecos;
 
     @OneToMany(mappedBy = "crea", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private Set<Usuario> usuarios;
 
     protected Crea() {

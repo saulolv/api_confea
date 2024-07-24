@@ -1,10 +1,15 @@
 package gov.api_confea.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -12,7 +17,6 @@ import java.util.UUID;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "tb_usuarios")
-@Data
 public abstract class Usuario {
 
     @Id
@@ -59,22 +63,28 @@ public abstract class Usuario {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_rg", referencedColumnName = "id")
+    @JsonManagedReference
     private Rg rg;
 
     @ManyToOne
     @JoinColumn(name = "codigo_crea", referencedColumnName = "codigo_crea")
+    @JsonBackReference
     private Crea crea;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "usuario")
+    @JsonManagedReference
     private Set<Telefone> telefones;
 
     @OneToOne
     @JoinColumn(name = "codigo_titulo_eleitoral", referencedColumnName = "codigo")
+    @JsonManagedReference
     private TituloEleitoral tituloEleitoral;
 
     @Column(nullable = false, name="data_criacao")
     private final LocalDateTime dataCriacao = LocalDateTime.now();
 
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private Set<EnderecoUsuario> enderecos;
 
     protected Usuario() {
     }
@@ -99,6 +109,162 @@ public abstract class Usuario {
         this.telefones = telefones;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public Sexo getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(Sexo sexo) {
+        this.sexo = sexo;
+    }
+
+    public LocalDate getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(LocalDate dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+
+    public String getNomeSocial() {
+        return nomeSocial;
+    }
+
+    public void setNomeSocial(String nomeSocial) {
+        this.nomeSocial = nomeSocial;
+    }
+
+    public PNE getPne() {
+        return pne;
+    }
+
+    public void setPne(PNE pne) {
+        this.pne = pne;
+    }
+
+    public String getNacionalidade() {
+        return nacionalidade;
+    }
+
+    public void setNacionalidade(String nacionalidade) {
+        this.nacionalidade = nacionalidade;
+    }
+
+    public String getCidadeNaturalidade() {
+        return cidadeNaturalidade;
+    }
+
+    public void setCidadeNaturalidade(String cidadeNaturalidade) {
+        this.cidadeNaturalidade = cidadeNaturalidade;
+    }
+
+    public String getUfNaturalidade() {
+        return ufNaturalidade;
+    }
+
+    public void setUfNaturalidade(String ufNaturalidade) {
+        this.ufNaturalidade = ufNaturalidade;
+    }
+
+    public String getPaisNascimento() {
+        return paisNascimento;
+    }
+
+    public void setPaisNascimento(String paisNascimento) {
+        this.paisNascimento = paisNascimento;
+    }
+
+    public Rg getRg() {
+        return rg;
+    }
+
+    public void setRg(Rg rg) {
+        this.rg = rg;
+    }
+
+    public Crea getCrea() {
+        return crea;
+    }
+
+    public void setCrea(Crea crea) {
+        this.crea = crea;
+    }
+
+    public Set<Telefone> getTelefones() {
+        return telefones;
+    }
+
+    public void setTelefones(Set<Telefone> telefones) {
+        this.telefones = telefones;
+    }
+
+    public TituloEleitoral getTituloEleitoral() {
+        return tituloEleitoral;
+    }
+
+    public void setTituloEleitoral(TituloEleitoral tituloEleitoral) {
+        this.tituloEleitoral = tituloEleitoral;
+    }
+
+    public LocalDateTime getDataCriacao() {
+        return dataCriacao;
+    }
+
+    public Set<EnderecoUsuario> getEnderecos() {
+        return enderecos;
+    }
+
+    public void setEnderecos(Set<EnderecoUsuario> enderecos) {
+        this.enderecos = enderecos;
+    }
+
+    public void setSexoMasculino() {
+        this.sexo = Sexo.MASCULINO;
+    }
+
+    public void setSexoFeminino() {
+        this.sexo = Sexo.FEMININO;
+    }
+
+    public void setSexoOutro() {
+        this.sexo = Sexo.OUTRO;
+    }
+
+    public void setPNE() {
+        this.pne = PNE.SIM;
+    }
+
+    public void setNaoPNE() {
+        this.pne = PNE.NAO;
+    }
+
     public UUID getId() {
         return this.id;
     }
@@ -111,7 +277,8 @@ public abstract class Usuario {
 
 enum Sexo {
     MASCULINO,
-    FEMININO
+    FEMININO,
+    OUTRO
 }
 
 enum PNE { // Precisa ser configurado adequadamente
