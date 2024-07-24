@@ -9,7 +9,6 @@ import java.util.Set;
 
 @Entity
 @Table(name = "tb_titulos")
-@Data
 public class Titulo {
 
     @Id
@@ -58,5 +57,65 @@ public class Titulo {
     public void removeCarteira(Carteira carteira) {
         this.carteiras.remove(carteira);
         carteira.getTitulos().remove(this);
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
+    public String getNomeMasculino() {
+        return nomeMasculino;
+    }
+
+    public void setNomeMasculino(String nomeMasculino) {
+        this.nomeMasculino = nomeMasculino;
+    }
+
+    public String getNomeFeminino() {
+        return nomeFeminino;
+    }
+
+    public void setNomeFeminino(String nomeFeminino) {
+        this.nomeFeminino = nomeFeminino;
+    }
+
+    public String getNomeAbreviado() {
+        return nomeAbreviado;
+    }
+
+    public void setNomeAbreviado(String nomeAbreviado) {
+        this.nomeAbreviado = nomeAbreviado;
+    }
+
+    public Boolean getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(Boolean ativo) {
+        this.ativo = ativo;
+    }
+
+    public Curso getCurso() {
+        return curso;
+    }
+
+    public void setCurso(Curso curso) {
+        this.curso = curso;
+    }
+
+    public Modalidade getModalidade() {
+        return modalidade;
+    }
+
+    public void setModalidade(Modalidade modalidade) {
+        this.modalidade = modalidade;
+    }
+
+    public void setCarteiras(Set<Carteira> carteiras) {
+        this.carteiras = carteiras;
     }
 }

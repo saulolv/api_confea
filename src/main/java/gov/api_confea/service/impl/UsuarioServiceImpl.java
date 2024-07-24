@@ -26,11 +26,12 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public Usuario buscarPorEmailouCpf(String email, String cpf) {
-        UsuarioFiltroDto filtro = new UsuarioFiltroDto(email, cpf);
+    public Usuario buscarPorEmailouCpf(String login) {
+        UsuarioFiltroDto filtro = new UsuarioFiltroDto(login);
         Specification<Usuario> specification = UsuarioSpecification.filtrar(filtro);
         List<Usuario> usuarios = usuarioRepository.findAll(specification);
         return usuarios.isEmpty() ? null : usuarios.get(0);
     }
+
 
 }

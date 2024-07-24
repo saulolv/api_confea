@@ -1,5 +1,6 @@
 package gov.api_confea.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,6 +20,7 @@ public class EnderecoCrea extends Endereco {
 
     @ManyToOne
     @JoinColumn(name = "codigo_crea", referencedColumnName = "codigo_crea")
+    @JsonBackReference
     private Crea crea;
 
     public EnderecoCrea() {
@@ -29,8 +31,6 @@ public class EnderecoCrea extends Endereco {
         this.inicioExpediente = inicioExpediente;
         this.fimExpediente = fimExpediente;
     }
-
-
 
     public LocalDateTime getInicioExpediente() {
         return inicioExpediente;

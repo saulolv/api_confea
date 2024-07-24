@@ -8,7 +8,6 @@ import java.util.Set;
 
 @Entity
 @Table(name = "tb_modalidades")
-@Data
 public class Modalidade {
 
     @Id
@@ -24,4 +23,36 @@ public class Modalidade {
     @ManyToOne
     @JoinColumn(name = "codigo_grupo", referencedColumnName = "codigo")
     private Grupo grupo;
+
+    public Integer getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(Integer codigo) {
+        this.codigo = codigo;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public Set<Titulo> getTitulos() {
+        return titulos;
+    }
+
+    public void setTitulos(Set<Titulo> titulos) {
+        this.titulos = titulos;
+    }
+
+    public Grupo getGrupo() {
+        return grupo;
+    }
+
+    public void setGrupo(Grupo grupo) {
+        this.grupo = grupo;
+    }
 }

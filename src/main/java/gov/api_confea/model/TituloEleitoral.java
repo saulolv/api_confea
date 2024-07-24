@@ -5,7 +5,6 @@ import lombok.Data;
 
 @Entity
 @Table(name = "tb_titulos_eleitorais")
-@Data
 public class TituloEleitoral {
 
     @Id
@@ -17,6 +16,55 @@ public class TituloEleitoral {
     private String municipio;
     private String uf;
 
-    @OneToOne(mappedBy = "tituloEleitoral")
-    private Usuario usuario;
+    @OneToOne
+    @JoinColumn(name = "profissional_id") // Ensure this column name matches the actual foreign key column name in your database schema
+    private Profissional profissional;
+
+    public Long getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(Long codigo) {
+        this.codigo = codigo;
+    }
+
+    public String getZona() {
+        return zona;
+    }
+
+    public void setZona(String zona) {
+        this.zona = zona;
+    }
+
+    public String getSecao() {
+        return secao;
+    }
+
+    public void setSecao(String secao) {
+        this.secao = secao;
+    }
+
+    public String getMunicipio() {
+        return municipio;
+    }
+
+    public void setMunicipio(String municipio) {
+        this.municipio = municipio;
+    }
+
+    public String getUf() {
+        return uf;
+    }
+
+    public void setUf(String uf) {
+        this.uf = uf;
+    }
+
+    public Profissional getProfissional() {
+        return profissional;
+    }
+
+    public void setProfissional(Profissional profissional) {
+        this.profissional = profissional;
+    }
 }

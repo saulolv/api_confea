@@ -12,6 +12,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Set;
 
+// @Component
 public class DataLoader implements CommandLineRunner {
     private final ProfissionalRepository profissionalRepository;
     private final BCryptPasswordEncoder passwordEncoder;

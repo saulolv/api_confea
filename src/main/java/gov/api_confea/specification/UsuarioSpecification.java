@@ -13,12 +13,16 @@ public class UsuarioSpecification {
         return (root, query, builder) -> {
             List<Predicate> predicates = new ArrayList<>();
 
-            if (filtro.getCpf() != null) {
-                predicates.add(builder.equal(root.get("cpf"), filtro.getCpf()));
-            }
-            if (filtro.getEmail() != null) {
-                predicates.add(builder.equal(root.get("email"), filtro.getEmail()));
-            }
+//            if (filtro.getLogin() != null) {
+//                predicates.add(builder.equal(root.get("cpf"), filtro.getLogin()));
+//            }
+//            if (filtro.getLogin() != null) {
+//                predicates.add(builder.equal(root.get("email"), filtro.getLogin()));
+//            }
+            predicates.add(builder.or(
+                    builder.equal(root.get("cpf"), filtro.getLogin()),
+                    builder.equal(root.get("email"), filtro.getLogin())
+            ));
 
             return builder.or(predicates.toArray(new Predicate[0]));
         };

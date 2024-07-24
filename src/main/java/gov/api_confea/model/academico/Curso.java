@@ -1,5 +1,6 @@
 package gov.api_confea.model.academico;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -7,7 +8,6 @@ import java.util.Set;
 
 @Entity
 @Table(name = "tb_cursos")
-@Data
 public class Curso {
 
     @Id
@@ -39,6 +39,7 @@ public class Curso {
 
     @OneToOne
     @JoinColumn(name = "codigo_titulo", referencedColumnName = "codigo")
+    @JsonManagedReference
     private Titulo titulo;
 
     @OneToMany
@@ -58,6 +59,98 @@ public class Curso {
             titulo.addCurso(null);
             this.titulo = null;
         }
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+    public Nivel getNivel() {
+        return nivel;
+    }
+
+    public void setNivel(Nivel nivel) {
+        this.nivel = nivel;
+    }
+
+    public String getCoordenador() {
+        return coordenador;
+    }
+
+    public void setCoordenador(String coordenador) {
+        this.coordenador = coordenador;
+    }
+
+    public String getModalidade() {
+        return modalidade;
+    }
+
+    public void setModalidade(String modalidade) {
+        this.modalidade = modalidade;
+    }
+
+    public String getTurno() {
+        return turno;
+    }
+
+    public void setTurno(String turno) {
+        this.turno = turno;
+    }
+
+    public Universidade getUniversidade() {
+        return universidade;
+    }
+
+    public void setUniversidade(Universidade universidade) {
+        this.universidade = universidade;
+    }
+
+    public Set<Grade> getGrades() {
+        return grades;
+    }
+
+    public void setGrades(Set<Grade> grades) {
+        this.grades = grades;
+    }
+
+    public void setNivelGraduacao() {
+        this.nivel = Nivel.GRADUACAO;
+    }
+
+    public void setNivelPosGraduacao() {
+        this.nivel = Nivel.POS_GRADUACAO;
+    }
+
+    public void setNivelMestrado() {
+        this.nivel = Nivel.MESTRADO;
+    }
+
+    public void setNivelDoutorado() {
+        this.nivel = Nivel.DOUTORADO;
+    }
+
+    public void setNivelPosDoutorado() {
+        this.nivel = Nivel.POS_DOUTORADO;
     }
 }
 

@@ -7,7 +7,6 @@ import java.util.Set;
 
 @Entity
 @Table(name = "tb_atribuicoes")
-@Data
 public class Atribuicao {
 
     @Id
@@ -32,5 +31,33 @@ public class Atribuicao {
     public void removeGrade(Grade grade) {
         this.grades.remove(grade);
         grade.getAtribuicoes().remove(this);
+    }
+
+    public Integer getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(Integer codigo) {
+        this.codigo = codigo;
+    }
+
+    public String getAtribuicao() {
+        return atribuicao;
+    }
+
+    public void setAtribuicao(String atribuicao) {
+        this.atribuicao = atribuicao;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public void setGrades(Set<Grade> grades) {
+        this.grades = grades;
     }
 }

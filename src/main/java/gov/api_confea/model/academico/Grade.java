@@ -2,16 +2,11 @@ package gov.api_confea.model.academico;
 
 import gov.api_confea.model.Profissional;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-@Getter
-@Setter
 @Entity
 @Table(name = "tb_grades")
 public class Grade {
@@ -67,5 +62,41 @@ public class Grade {
     public void removeAtribuicao(Atribuicao atribuicao) {
         this.atribuicoes.remove(atribuicao);
         atribuicao.getGrades().remove(this);
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public String getPeriodoInicio() {
+        return periodoInicio;
+    }
+
+    public void setPeriodoInicio(String periodoInicio) {
+        this.periodoInicio = periodoInicio;
+    }
+
+    public String getPeriodoFim() {
+        return periodoFim;
+    }
+
+    public void setPeriodoFim(String periodoFim) {
+        this.periodoFim = periodoFim;
+    }
+
+    public Curso getCurso() {
+        return curso;
+    }
+
+    public void setCurso(Curso curso) {
+        this.curso = curso;
+    }
+
+    public void setProfissionais(Set<Profissional> profissionais) {
+        this.profissionais = profissionais;
+    }
+
+    public void setAtribuicoes(Set<Atribuicao> atribuicoes) {
+        this.atribuicoes = atribuicoes;
     }
 }

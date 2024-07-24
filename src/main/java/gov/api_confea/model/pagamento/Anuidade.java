@@ -1,5 +1,6 @@
 package gov.api_confea.model.pagamento;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import gov.api_confea.model.Vinculo;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -14,7 +15,6 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "tb_anuidades")
-@Getter @Setter @NoArgsConstructor
 public class Anuidade {
 
     @Id
@@ -44,7 +44,12 @@ public class Anuidade {
     private List<Parcela> parcelas = new ArrayList<>();
 
     @ManyToOne
+    @JoinColumn(name = "id_vinculo", referencedColumnName = "id")
+    @JsonBackReference
     private Vinculo vinculo;
+
+    public Anuidade() {
+    }
 
     public Anuidade(Integer valor, StatusAnuidade status, String tipoPagamento, String anoPagamento) {
         this.valor = valor;

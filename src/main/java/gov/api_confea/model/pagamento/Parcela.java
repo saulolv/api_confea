@@ -1,18 +1,12 @@
 package gov.api_confea.model.pagamento;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
 @Table(name = "tb_parcelas")
-@Getter
-@Setter
-@NoArgsConstructor
 public class Parcela {
 
     @Id
@@ -34,10 +28,57 @@ public class Parcela {
     @ManyToOne
     private Anuidade anuidade;
 
+    public Parcela() {
+    }
+
     public Parcela(Integer valor, Integer numeroParcelamento, LocalDateTime dataPagamento, String tipoPagamento) {
         this.valor = valor;
         this.numeroParcelamento = numeroParcelamento;
         this.dataPagamento = dataPagamento;
         this.tipoPagamento = tipoPagamento;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public Integer getValor() {
+        return valor;
+    }
+
+    public void setValor(Integer valor) {
+        this.valor = valor;
+    }
+
+    public Integer getNumeroParcelamento() {
+        return numeroParcelamento;
+    }
+
+    public void setNumeroParcelamento(Integer numeroParcelamento) {
+        this.numeroParcelamento = numeroParcelamento;
+    }
+
+    public LocalDateTime getDataPagamento() {
+        return dataPagamento;
+    }
+
+    public void setDataPagamento(LocalDateTime dataPagamento) {
+        this.dataPagamento = dataPagamento;
+    }
+
+    public String getTipoPagamento() {
+        return tipoPagamento;
+    }
+
+    public void setTipoPagamento(String tipoPagamento) {
+        this.tipoPagamento = tipoPagamento;
+    }
+
+    public Anuidade getAnuidade() {
+        return anuidade;
+    }
+
+    public void setAnuidade(Anuidade anuidade) {
+        this.anuidade = anuidade;
     }
 }
