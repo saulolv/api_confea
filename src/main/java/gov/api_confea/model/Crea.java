@@ -1,13 +1,15 @@
 package gov.api_confea.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Set;
 
 @Entity
 @Table(name = "tb_creas")
-@Data
 public class Crea {
 
     @Id
@@ -29,24 +31,74 @@ public class Crea {
     private String assinaturaPresidente; // revisar tipo
 
     @OneToMany(mappedBy = "crea", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private Set<EnderecoCrea> enderecos;
 
     @OneToMany(mappedBy = "crea", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private Set<Usuario> usuarios;
 
-    protected Crea() {
+    public String getCodigoCrea() {
+        return codigoCrea;
     }
 
-    public Crea(String codigoCrea, String nome, String cnpj, String email, String assinaturaPresidente, Set<EnderecoCrea> enderecos) {
-        if(enderecos == null || enderecos.isEmpty())
-            throw new IllegalArgumentException("Endereços não podem ser nulos ou vazios");
+    public void setCodigoCrea(String codigoCrea) {
         this.codigoCrea = codigoCrea;
+    }
+
+    public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
+    }
+
+    public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void setPageUrl(String pageUrl) {
+        this.pageUrl = pageUrl;
+    }
+
+    public void setAssinaturaPresidente(String assinaturaPresidente) {
         this.assinaturaPresidente = assinaturaPresidente;
+    }
+
+    public void setEnderecos(Set<EnderecoCrea> enderecos) {
         this.enderecos = enderecos;
     }
 
+    public void setUsuarios(Set<Usuario> usuarios) {
+        this.usuarios = usuarios;
+    }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public String getCnpj() {
+        return cnpj;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPageUrl() {
+        return pageUrl;
+    }
+
+    public String getAssinaturaPresidente() {
+        return assinaturaPresidente;
+    }
+
+    public Set<EnderecoCrea> getEnderecos() {
+        return enderecos;
+    }
+
+    public Set<Usuario> getUsuarios() {
+        return usuarios;
+    }
 }

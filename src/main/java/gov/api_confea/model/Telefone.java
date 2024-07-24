@@ -1,5 +1,6 @@
 package gov.api_confea.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -26,10 +27,12 @@ public class Telefone {
 
     @ManyToOne
     @JoinColumn(name = "id_usuario", referencedColumnName = "id")
+    @JsonBackReference
     private Usuario usuario;
 
     @ManyToOne
     @JoinColumn(name = "id_crea")
+    @JsonBackReference
     private Crea crea;
 }
 

@@ -1,10 +1,13 @@
 package gov.api_confea.model;
 
+import gov.api_confea.model.pagamento.Anuidade;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -35,6 +38,10 @@ public class Vinculo {
 
     @Column(name = "data_cancelamento")
     private LocalDateTime DataCancelamento;
+
+    @OneToMany
+    @JoinColumn(name = "id_anuidade", referencedColumnName = "id")
+    private List<Anuidade> anuidade = new ArrayList<>();
 }
 
 enum TipoRegistro { // verficar os tipos
